@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity;
-@inject UserManager<ApplicationUser> usermanger
+@inject UserManager<Customer> usermanger
 @{
     var user = usermanger?.GetUserAsync(User).Result;
     var profilePicture = user?.ImageName ?? "Defualt.png";

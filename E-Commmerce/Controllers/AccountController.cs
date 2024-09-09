@@ -17,11 +17,11 @@ namespace E_Commmerce.Controllers;
 [Authorize(Roles = nameof(Roles.Admin))]
 public  class AccountController : Controller
 {
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly UserManager<Customer> _userManager;
+    private readonly SignInManager<Customer> _signInManager;
     private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public AccountController(UserManager<ApplicationUser> userManager , SignInManager<ApplicationUser> signInManager,
+    public AccountController(UserManager<Customer> userManager , SignInManager<Customer> signInManager,
         IWebHostEnvironment webHostEnvironment)
     {
         _userManager = userManager;
@@ -58,7 +58,7 @@ public  class AccountController : Controller
     {
         if(ModelState.IsValid)
         {
-            var user = new ApplicationUser()
+            var user = new Customer()
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
@@ -97,7 +97,7 @@ public  class AccountController : Controller
     {
         if (ModelState.IsValid)
         {
-            var user = new ApplicationUser()
+            var user = new Customer()
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
@@ -108,7 +108,7 @@ public  class AccountController : Controller
             var result =_userManager.CreateAsync(user, model.Password).Result;
             if(result.Succeeded)
             {
-                _userManager.AddToRoleAsync(user, nameof(Roles.User)).Wait();
+                _userManager.AddToRoleAsync(user, nameof(Roles.Admin)).Wait();
                    _signInManager.SignInAsync(user, false);
                 return RedirectToAction(nameof(Login));
             }

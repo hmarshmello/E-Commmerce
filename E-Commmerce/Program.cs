@@ -20,7 +20,7 @@ namespace E_Commmerce
 
 
 
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            builder.Services.AddIdentity<Customer, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbcontext>()
                 .AddDefaultTokenProviders();
 
@@ -50,7 +50,7 @@ namespace E_Commmerce
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Category}/{action=UserIndex}/{id?}");
+                pattern: "{controller=Account}/{action=Register}/{id?}");
 
             app.Run();
         }

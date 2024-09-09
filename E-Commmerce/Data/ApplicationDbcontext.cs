@@ -7,7 +7,7 @@ using E_Commmerce.ViewModels;
 
 namespace E_Commmerce.Data;
 
-public class ApplicationDbcontext :IdentityDbContext<ApplicationUser>
+public class ApplicationDbcontext :IdentityDbContext<Customer>
 {
     public DbSet<Product> Products { get; set; } = null!;
     public DbSet<Category> Categories { get; set; } = null!;
@@ -21,7 +21,7 @@ public class ApplicationDbcontext :IdentityDbContext<ApplicationUser>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        builder.Entity<ApplicationUser>().ToTable("Users");
+        builder.Entity<Customer>().ToTable("Users");
         builder.Entity<IdentityRole>().ToTable("Roles");
         builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
         builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
@@ -58,6 +58,8 @@ public class ApplicationDbcontext :IdentityDbContext<ApplicationUser>
 
 
     public DbSet<RoleViewModel> RoleViewModel { get; set; } = default!;
+
+public DbSet<E_Commmerce.Models.ShoppingCart> ShoppingCart { get; set; } = default!;
 
     
 
